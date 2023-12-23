@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import Image from "next/image";
 
 function useMusicDownload() {
     const urlPattern = new RegExp('^(https?:\\/\\/)?(www.|m.)?(soundcloud.com|snd.sc|youtube.com|youtu.be)\\/.*$');
@@ -46,27 +47,22 @@ export default function Home() {
         setPreviewUrl(apiURL);
     };
     return (
-        <div className="min-h-screen bg-black flex flex-col items-center justify-center py-3 md:py-7">
+        <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
 
-            <div className="bg-black shadow-xl rounded-lg p-5 md:p-10 mb-5">
-                <h1 className="text-3xl font-bold text-white">Welcome to Music Download</h1>
-                <p className="mt-2 text-white">Enter the standard URL of the SoundCloud or YouTube music you want to
-                    download</p>
+            <div className="flex justify-center py-5">
+                <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={500} height={500}/>
             </div>
 
             <form onSubmit={handleSubmit}
-                  className="bg-white shadow-xl rounded-lg px-5 py-3 md:px-10 md:py-5 max-w-md w-full">
+                  className="bg-white text-black shadow-xl rounded-lg px-5 py-5 md:px-10 md:py-5 max-w-md w-full">
 
-                <div className="mb-4">
-                    <label htmlFor="url" className="block text-sm font-semibold mb-2">
-                        Music URL:
-                    </label>
+                <div className="mb-5">
                     <input
                         id="url"
                         type="text"
                         value={url}
                         onChange={e => setUrl(e.target.value)}
-                        className="border border-gray-300 p-2 rounded-lg focus:border-gray-700 w-full"
+                        className="border border-black p-2 rounded-lg focus:border-gray-700 w-full"
                         placeholder="Enter Music URL"
                     />
                 </div>
@@ -77,9 +73,10 @@ export default function Home() {
                 </button>
 
                 <button type="button" onClick={handlePreview}
-                        className="w-full py-3 mt-5 bg-blue-500 rounded-lg font-bold text-white text-center hover:bg-blue-700">
+                        className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
                     Preview
                 </button>
+
             </form>
 
             {error && (
