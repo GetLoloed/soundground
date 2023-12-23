@@ -1,0 +1,36 @@
+{
+  "name": "soundground",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "clsx": "^2.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "fs": "0.0.1-security",
+    "lucide-react": "^0.300.0",
+    "next": "14.0.4",
+    "pocketbase": "^0.20.1",
+    "prism-media": "^1.3.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "soundcloud-downloader": "^1.0.0",
+    "stream": "^0.0.2",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
+  }
+}
