@@ -1,6 +1,13 @@
 import {pipeline} from 'stream';
 import ytdl from 'ytdl-core';
 import scdl from 'soundcloud-downloader';
+import ffmpeg from 'fluent-ffmpeg';
+import ffmpegPath from '@ffmpeg-installer/ffmpeg';
+import ffprobePath from '@ffprobe-installer/ffprobe';
+
+// Set ffmpeg and ffprobe paths
+ffmpeg.setFfmpegPath(ffmpegPath.path);
+ffmpeg.setFfprobePath(ffprobePath.path);
 
 const getService = (url) => {
     if (ytdl.validateURL(url)) {
@@ -32,10 +39,15 @@ export default async (req, res) => {
             const info = await ytdl.getInfo(url);
             title = info.videoDetails.title;
             stream = ytdl(url, {filter: 'audioonly', quality: 'highestaudio'});
+            stream = ffmpeg(stream).format('mp3').pipe();
         } else if (service === 'soundcloud') {
             const trackInfo = await scdl.getInfo(url);
             title = trackInfo.title;
-            stream = await scdl.download(url);
+            const data = await scdl.download(url);
+            stream = ffmpeg()
+                .input(data)
+                .format('mp3')
+                .pipe();
         }
 
         res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(title)}.mp3"`);
