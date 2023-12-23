@@ -15,6 +15,19 @@ function Metadata({ title, description, keywords }) {
             <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
             <meta name="msapplication-TileColor" content="#da532c"/>
             <meta name="theme-color" content="#ffffff"/>
+            <!-- Open Graph / Facebook -->
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://soundground.vercel.app/" />
+            <meta property="og:title" content="SoundGround" />
+            <meta property="og:description" content="Download music from SoundCloud and YouTube for free!" />
+            <meta property="og:image" content="https://soundground.vercel.app/img/meta-tags.png" />
+
+            <!-- Twitter -->
+            <meta property="twitter:card" content="summary_large_image" />
+            <meta property="twitter:url" content="https://soundground.vercel.app/" />
+            <meta property="twitter:title" content="SoundGround" />
+            <meta property="twitter:description" content="Download music from SoundCloud and YouTube for free!" />
+            <meta property="twitter:image" content="https://soundground.vercel.app/img/meta-tags.png" />
 
 
         </Head>
