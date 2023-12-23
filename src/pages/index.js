@@ -49,8 +49,8 @@ export default function Home() {
     };
     return (
         <>
-            <Metadata description={'Download music from SoundCloud and YouTube for free!'}
-                      keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']} title={'SoundGround'}/>
+            <Metadata description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from SoundCloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
+                      keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']} title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
             <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
 
                 <div className="flex justify-center py-5">
