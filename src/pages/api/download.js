@@ -6,12 +6,11 @@ import ffmpeg from 'fluent-ffmpeg';
 
 // Définir les chemins pour ffmpeg et ffprobe en utilisant des variables d'environnement
 // ou inclure directement le binaire dans le projet et référencer son chemin relatif.
-const ffmpegPath = './bin/ffmpeg';  // Assurez-vous d'inclure le binaire dans votre dépôt
-const ffprobePath = './bin/ffprobe';  // Assurez-vous d'inclure le binaire dans votre dépôt
+import ffmpegPath from '@ffmpeg-installer/ffmpeg';
+import ffprobePath from '@ffprobe-installer/ffprobe';
 
-// Configurer les chemins de ffmpeg et ffprobe
-ffmpeg.setFfmpegPath(ffmpegPath);
-ffmpeg.setFfprobePath(ffprobePath);
+ffmpeg.setFfmpegPath(ffmpegPath.path);
+ffmpeg.setFfprobePath(ffprobePath.path);
 
 // Fonction pour déterminer le service basé sur l'URL
 const getService = (url) => {
