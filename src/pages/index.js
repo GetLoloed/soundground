@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Image from "next/image";
+import Metadata from "@/components/Metadata";
 
 function useMusicDownload() {
     const urlPattern = new RegExp('^(https?:\\/\\/)?(www.|m.)?(soundcloud.com|snd.sc|youtube.com|youtu.be)\\/.*$');
@@ -47,51 +48,55 @@ export default function Home() {
         setPreviewUrl(apiURL);
     };
     return (
-        <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
+        <>
+            <Metadata description={'Download music from SoundCloud and YouTube for free!'}
+                      keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']} title={'SoundGround'}/>
+            <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
 
-            <div className="flex justify-center py-5">
-                <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={500} height={500}/>
+                <div className="flex justify-center py-5">
+                    <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400} />
+                </div>
+
+                <form onSubmit={handleSubmit}
+                      className="bg-white text-black shadow-xl rounded-lg px-5 py-5 md:px-10 md:py-5 max-w-md w-full">
+
+                    <div className="mb-5">
+                        <input
+                            id="url"
+                            type="text"
+                            value={url}
+                            onChange={e => setUrl(e.target.value)}
+                            className="border border-black p-2 rounded-lg focus:border-gray-700 w-full"
+                            placeholder="Enter Music URL"
+                        />
+                    </div>
+
+                    <button type="submit"
+                            className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
+                        Download
+                    </button>
+
+                    <button type="button" onClick={handlePreview}
+                            className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
+                        Preview
+                    </button>
+
+                </form>
+
+                {error && (
+                    <p className="mt-5 text-red-500">{error}</p>
+                )}
+
+                {previewUrl && (
+                    <div className="mt-5 w-full max-w-md">
+                        <audio controls className="w-full">
+                            <source src={previewUrl} type="audio/mpeg"/>
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                )}
             </div>
-
-            <form onSubmit={handleSubmit}
-                  className="bg-white text-black shadow-xl rounded-lg px-5 py-5 md:px-10 md:py-5 max-w-md w-full">
-
-                <div className="mb-5">
-                    <input
-                        id="url"
-                        type="text"
-                        value={url}
-                        onChange={e => setUrl(e.target.value)}
-                        className="border border-black p-2 rounded-lg focus:border-gray-700 w-full"
-                        placeholder="Enter Music URL"
-                    />
-                </div>
-
-                <button type="submit"
-                        className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
-                    Download
-                </button>
-
-                <button type="button" onClick={handlePreview}
-                        className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
-                    Preview
-                </button>
-
-            </form>
-
-            {error && (
-                <p className="mt-5 text-red-500">{error}</p>
-            )}
-
-            {previewUrl && (
-                <div className="mt-5 w-full max-w-md">
-                    <audio controls className="w-full">
-                        <source src={previewUrl} type="audio/mpeg"/>
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            )}
-        </div>
+        </>
     )
 
 }
