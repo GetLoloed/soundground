@@ -57,7 +57,7 @@ export default function Download() {
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
                 title={'SoundGround - Download'}/>
             <Navbar/>
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
+            <div className="min-h-screen flex flex-col items-center justify-center p-4 lg:p-8">
                 <div className="text-center mb-10 max-w-lg">
                     <h1 className="text-4xl font-bold mb-4 text-white">Unleash the Power of Music!</h1>
                     <p className="text-gray-400">Enter the URL from SoundCloud or YouTube to download or preview your favorite tracks. Experience music freely and effortlessly, right at your fingertips.</p>

@@ -33,7 +33,7 @@ export default function Search() {
                 title={'SoundGround - Search'}/>
             <Navbar/>
             <div
-                className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8 flex-grow">
+                className="min-h-screen flex flex-col items-center justify-center p-4 lg:p-8 flex-grow">
                 <div className="mb-5 flex w-full max-w-6xl">
                     <input
                         type="text"

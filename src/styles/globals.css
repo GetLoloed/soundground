@@ -14,3 +14,11 @@
 body { font-family: 'Satoshi-Light', fallbackFont, sans-serif;
 }
 
+@keyframes gradient {
+    0%, 100% {
+        background: #1A202C;
+    }
+    50% {
+        background: #000000;
+    }
+}

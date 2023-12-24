@@ -13,7 +13,7 @@ const HomePage = () => {
                       keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
             />
             <div
-                className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
+                className="min-h-screen flex flex-col items-center justify-center p-4 lg:p-8">
                 <Image src='/img/soundground_white.png' alt='Sound Ground Logo' width={300} height={300}/>
                 <div className="flex flex-col sm:flex-row space-y-10 sm:space-y-0 sm:space-x-10">
                     <div
