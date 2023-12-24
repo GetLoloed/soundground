@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Metadata from "@/components/Metadata";
 import Navbar from "@/components/Navbar";
-import {Play, Download, Youtube, Music, SearchIcon} from 'lucide-react';
+import {Play, Download, Youtube, Music, SearchIcon, ExternalLink} from 'lucide-react';
 
 export default function Search() {
     const [query, setQuery] = useState("");
@@ -75,6 +75,12 @@ export default function Search() {
                                         Your browser does not support the audio element.
                                     </audio>
                                 )}
+                                <div className="mt-4 flex items-center space-x-2 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2">
+                                    <img src={result.profile.picture ? result.profile.picture : '/path/to/default/image.jpg'} alt={result.profile.name} className="w-10 h-10 rounded-full"/>
+                                    <a href={result.profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400">
+                                        {result.profile.name} <ExternalLink className="inline ml-1" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     ))}

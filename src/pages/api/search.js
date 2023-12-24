@@ -17,6 +17,11 @@ export default async (req, res) => {
             thumbnail: item.thumbnail.url,
             duration: item.durationFormatted,
             source: 'YouTube',
+            profile: {
+                name: item.channel.name,
+                url: item.channel.url,
+                picture: item.channel.avatar,
+            },
         }));
 
         const soundcloudResults = await scdl.search({query: query, resourceType: 'tracks'});
@@ -27,6 +32,11 @@ export default async (req, res) => {
             thumbnail: item.artwork_url ? item.artwork_url.replace('-large', '-t500x500') : null,
             duration: item.duration / 1000,
             source: 'SoundCloud',
+            profile: {
+                name: item.user.username,
+                url: item.user.permalink_url,
+                picture: item.user.avatar_url,
+            },
         }));
 
         let results = [];
