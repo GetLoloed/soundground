@@ -37,7 +37,7 @@ export default function Home() {
     useEffect(() => {
         setIsValidUrl(validateUrl(url));
         if (previewUrl) setPreviewUrl(null);
-    }, [url]);
+    }, [url, previewUrl]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -66,7 +66,7 @@ export default function Home() {
             <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
 
                 <div className="flex justify-center py-5">
-                    <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400} priority />
+                    <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400} priority/>
                 </div>
 
                 <form onSubmit={handleSubmit}
