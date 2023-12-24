@@ -55,8 +55,8 @@ The project is structured as follows:
 
 ## Contributing
 
-Contributions are welcome! Please read the contributing guide for more information.
+Contributions are welcome! Please read [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
