@@ -1,61 +1,49 @@
 import {useState, useEffect} from 'react';
 import Image from "next/image";
+import useMusicDownload from "../hooks/useMusicDownload";
 import Metadata from "@/components/Metadata";
 
-function useMusicDownload() {
-    const urlPattern = new RegExp('^(https?:\\/\\/)?(www.|m.)?(soundcloud.com|snd.sc|youtube.com|youtu.be)\\/.*$');
-
-    const validateUrl = (url) => {
-        return urlPattern.test(url);
-    };
-
-    const downloadFileFromApi = (apiURL) => {
-        const link = document.createElement('a');
-        link.href = apiURL;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-
-    return {
-        validateUrl,
-        downloadFileFromApi,
-    };
-}
+const ERROR_MESSAGE = "Invalid URL. Please enter a standard SoundCloud or YouTube URL.";
+const API_DOWNLOAD_ENDPOINT = `/api/download?url=`;
+const API_PREVIEW_ENDPOINT = `/api/preview?url=`;
 
 export default function Home() {
     const [url, setUrl] = useState("");
     const [isValidUrl, setIsValidUrl] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [error, setError] = useState("");
-
     const {validateUrl, downloadFileFromApi} = useMusicDownload();
-
     const showPreviewButton = isValidUrl && !previewUrl;
     const showAudioPlayer = isValidUrl && previewUrl;
 
     useEffect(() => {
         setIsValidUrl(validateUrl(url));
-        if (previewUrl) setPreviewUrl(null);
-    }, [url, previewUrl]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [url]);
+    const validateAndSetError = (urlToValidate) => {
+        if (!validateUrl(urlToValidate)) {
+            setError(ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!validateUrl(url)) {
-            return setError("Invalid URL. Please enter a standard SoundCloud or YouTube URL.");
+        if (validateAndSetError(url)) {
+            const apiURL = API_DOWNLOAD_ENDPOINT + encodeURIComponent(url);
+            downloadFileFromApi(apiURL);
         }
-        const apiURL = `/api/download?url=${encodeURIComponent(url)}`;
-        downloadFileFromApi(apiURL);
     };
 
     const handlePreview = async (event) => {
         event.preventDefault();
-        if (!validateUrl(url)) {
-            return setError("Invalid URL. Please enter a standard SoundCloud or YouTube URL.");
+        if (validateAndSetError(url)) {
+            const apiURL = API_PREVIEW_ENDPOINT + encodeURIComponent(url);
+            setPreviewUrl(apiURL);
         }
-        const apiURL = `/api/preview?url=${encodeURIComponent(url)}`;
-        setPreviewUrl(apiURL);
     };
+
+
 
     return (
         <>
@@ -64,14 +52,11 @@ export default function Home() {
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
                 title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
             <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
-
                 <div className="flex justify-center py-5">
                     <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400} priority/>
                 </div>
-
                 <form onSubmit={handleSubmit}
                       className="bg-white text-black shadow-xl rounded-lg px-5 py-5 md:px-10 md:py-5 max-w-md w-full">
-
                     <div className="mb-5">
                         <input
                             id="url"
@@ -82,25 +67,20 @@ export default function Home() {
                             placeholder="Enter Music URL"
                         />
                     </div>
-
                     <button type="submit"
                             className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
                         Download
                     </button>
-
                     {showPreviewButton && (
                         <button type="button" onClick={handlePreview}
                                 className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
                             Preview
                         </button>
                     )}
-
                 </form>
-
                 {error && (
                     <p className="mt-5 text-red-500">{error}</p>
                 )}
-
                 {showAudioPlayer && (
                     <div className="mt-5 w-full max-w-md">
                         <audio controls className="w-full">
@@ -111,5 +91,5 @@ export default function Home() {
                 )}
             </div>
         </>
-    )
+    );
 }
