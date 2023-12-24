@@ -10,14 +10,8 @@ const Footer = () => {
                     <p className="text-sm">Your gateway to unlimited music. Download your favorite tracks from SoundCloud and YouTube for free!</p>
                 </div>
                 <div className="flex space-x-4">
-                    <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
+                    <a href="https://github.com/GetLoloed/soundground" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
                         <Github className="w-6 h-6" />
-                    </a>
-                    <a href="https://twitter.com/your-twitter" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-                        <Twitter className="w-6 h-6" />
-                    </a>
-                    <a href="https://facebook.com/your-facebook" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-                        <Facebook className="w-6 h-6" />
                     </a>
                 </div>
             </div>
