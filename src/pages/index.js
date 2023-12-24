@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Image from "next/image";
 import Metadata from "@/components/Metadata";
 
@@ -25,10 +25,19 @@ function useMusicDownload() {
 
 export default function Home() {
     const [url, setUrl] = useState("");
+    const [isValidUrl, setIsValidUrl] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [error, setError] = useState("");
 
     const {validateUrl, downloadFileFromApi} = useMusicDownload();
+
+    const showPreviewButton = isValidUrl && !previewUrl;
+    const showAudioPlayer = isValidUrl && previewUrl;
+
+    useEffect(() => {
+        setIsValidUrl(validateUrl(url));
+        if (previewUrl) setPreviewUrl(null);
+    }, [url]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -47,14 +56,17 @@ export default function Home() {
         const apiURL = `/api/preview?url=${encodeURIComponent(url)}`;
         setPreviewUrl(apiURL);
     };
+
     return (
         <>
-            <Metadata description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from SoundCloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
-                      keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']} title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
+            <Metadata
+                description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from soundcloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
+                keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
+                title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
             <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
 
                 <div className="flex justify-center py-5">
-                    <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400} />
+                    <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400}/>
                 </div>
 
                 <form onSubmit={handleSubmit}
@@ -76,10 +88,12 @@ export default function Home() {
                         Download
                     </button>
 
-                    <button type="button" onClick={handlePreview}
-                            className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
-                        Preview
-                    </button>
+                    {showPreviewButton && (
+                        <button type="button" onClick={handlePreview}
+                                className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
+                            Preview
+                        </button>
+                    )}
 
                 </form>
 
@@ -87,7 +101,7 @@ export default function Home() {
                     <p className="mt-5 text-red-500">{error}</p>
                 )}
 
-                {previewUrl && (
+                {showAudioPlayer && (
                     <div className="mt-5 w-full max-w-md">
                         <audio controls className="w-full">
                             <source src={previewUrl} type="audio/mpeg"/>
@@ -98,5 +112,4 @@ export default function Home() {
             </div>
         </>
     )
-
 }
