@@ -14,11 +14,17 @@
 body { font-family: 'Satoshi-Light', fallbackFont, sans-serif;
 }
 
-@keyframes gradient {
+@keyframes animation-gradient {
     0%, 100% {
-        background: #1A202C;
+        background-position: 0 50%;
     }
     50% {
-        background: #000000;
+        background-position: 100% 50%;
     }
+}
+
+.gradient {
+    background: linear-gradient(135deg, #1A202C, #2D3748, #000000);
+    background-size: 200% 200%;
+    animation: animation-gradient 6s ease-in-out infinite;
 }
