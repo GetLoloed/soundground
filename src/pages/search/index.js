@@ -31,7 +31,7 @@ export default function Search() {
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Search']}
                 title={'SoundGround - Search'}/>
             <Navbar/>
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
+            <div className="flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
                 <div className="mb-5 flex w-full max-w-6xl">
                     <input
                         type="text"
@@ -75,12 +75,18 @@ export default function Search() {
                                         Your browser does not support the audio element.
                                     </audio>
                                 )}
-                                <div className="mt-4 flex items-center space-x-2 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2">
-                                    <img src={result.profile.picture ? result.profile.picture : '/path/to/default/image.jpg'} alt={result.profile.name} className="w-10 h-10 rounded-full"/>
-                                    <a href={result.profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400">
+                                {result.source === 'YouTube' ? (
+                                    <a href={result.profile.url} target="_blank" rel="noopener noreferrer" className="mt-4 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2 inline-flex items-center">
                                         {result.profile.name} <ExternalLink className="inline ml-1" />
                                     </a>
-                                </div>
+                                ) : (
+                                    <div className="mt-4 flex items-center space-x-2 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2">
+                                        <img src={result.profile.picture ? result.profile.picture : '/path/to/default/image.jpg'} alt={result.profile.name} className="w-10 h-10 rounded-full"/>
+                                        <a href={result.profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400">
+                                            {result.profile.name} <ExternalLink className="inline ml-1" />
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}
