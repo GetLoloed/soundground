@@ -13,6 +13,7 @@
     "@vercel/speed-insights": "^1.0.2",
     "clsx": "^2.0.0",
     "fluent-ffmpeg": "^2.1.2",
+    "framer-motion": "^10.16.16",
     "fs": "0.0.1-security",
     "lucide-react": "^0.300.0",
     "next": "14.0.4",
@@ -22,10 +23,12 @@
     "react": "^18",
     "react-dom": "^18",
     "soundcloud-downloader": "^1.0.0",
+    "soundcloud-scraper": "^5.0.3",
     "stream": "^0.0.2",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "tmp": "^0.2.1",
+    "youtube-sr": "^4.3.10",
     "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
