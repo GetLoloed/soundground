@@ -1,95 +1,30 @@
-import { useState, useEffect } from 'react';
-import Image from "next/image";
-import useMusicDownload from "../hooks/useMusicDownload";
-import Metadata from "@/components/Metadata";
-import Navbar from "@/components/Navbar";
-
-const ERROR_MESSAGE = "Invalid URL. Please enter a standard SoundCloud or YouTube URL.";
-const API_DOWNLOAD_ENDPOINT = `/api/download?url=`;
-const API_PREVIEW_ENDPOINT = `/api/preview?url=`;
-
-export default function Home() {
-    const [url, setUrl] = useState("");
-    const [isValidUrl, setIsValidUrl] = useState(false);
-    const [previewUrl, setPreviewUrl] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-    const { validateUrl, downloadFileFromApi } = useMusicDownload();
-    const showPreviewButton = isValidUrl && !previewUrl;
-    const showAudioPlayer = isValidUrl && previewUrl;
-
-    useEffect(() => {
-        setIsValidUrl(validateUrl(url));
-    }, [url]);
-    const validateAndSetError = (urlToValidate) => {
-        if (!validateUrl(urlToValidate)) {
-            setError(ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (validateAndSetError(url)) {
-            setIsLoading(true);
-            const apiURL = API_DOWNLOAD_ENDPOINT + encodeURIComponent(url);
-            await downloadFileFromApi(apiURL);
-            setIsLoading(false);
-        }
-    };
-
-    const handlePreview = async (event) => {
-        event.preventDefault();
-        if (validateAndSetError(url)) {
-            const apiURL = API_PREVIEW_ENDPOINT + encodeURIComponent(url);
-            setPreviewUrl(apiURL);
-        }
-    };
-
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Download, Search } from 'lucide-react';
+const HomePage = () => {
     return (
-        <>
-            <Metadata
-                description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from soundcloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
-                keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
-                title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
-            <Navbar/>
-            <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7 h-full">
-                <form onSubmit={handleSubmit}
-                      className="bg-white text-black shadow-xl rounded-lg px-5 py-5 md:px-10 md:py-5 max-w-md w-full">
-                    <div className="mb-5">
-                        <input
-                            id="url"
-                            type="text"
-                            value={url}
-                            onChange={e => setUrl(e.target.value)}
-                            className="border border-black p-2 rounded-lg focus:border-gray-700 w-full"
-                            placeholder="Enter Music URL"
-                        />
-                    </div>
-                    <button type="submit"
-                            className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
-                        {isLoading ? 'Loading...' : 'Download'}
-                    </button>
-                    {showPreviewButton && (
-                        <button type="button" onClick={handlePreview}
-                                className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
-                            Preview
-                        </button>
-                    )}
-                </form>
-                {error && (
-                    <p className="mt-5 text-red-500">{error}</p>
-                )}
-                {showAudioPlayer && (
-                    <div className="mt-5 w-full max-w-md">
-                        <audio controls className="w-full">
-                            <source src={previewUrl} type="audio/mpeg"/>
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                )}
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
+            <Image src='/img/soundground_white.png' alt='Sound Ground Logo' width={300} height={300}/>
+            <div className="flex flex-col sm:flex-row space-y-10 sm:space-y-0 sm:space-x-10">
+                <div className="bg-gray-800 text-white shadow-2xl rounded-lg px-5 py-10 w-full max-w-lg transition duration-500 hover:bg-gray-700">
+                    <h2 className="text-2xl font-bold mb-5">Download</h2>
+                    <p className="mb-5">Download your favorite tracks from SoundCloud and YouTube for free! Experience the joy of music, anytime, anywhere.</p>
+                    <Link href="/download" className="text-white bg-gray-600 hover:bg-gray-500 rounded px-4 py-2 transition duration-300">
+                        <Download className="inline-block mr-2" />
+                        Go to Download
+                    </Link>
+                </div>
+                <div className="bg-gray-800 text-white shadow-2xl rounded-lg px-5 py-10 w-full max-w-lg transition duration-500 hover:bg-gray-700">
+                    <h2 className="text-2xl font-bold mb-5">Search</h2>
+                    <p className="mb-5">Search for music from YouTube and SoundCloud. Listen to a short snippet of the track before you download it.</p>
+                    <Link href="/search" className="text-white bg-gray-600 hover:bg-gray-500 rounded px-4 py-2 transition duration-300">
+                        <Search className="inline-block mr-2" /> Go to Search
+                    </Link>
+                </div>
             </div>
-        </>
+        </div>
     );
-}
+};
+
+export default HomePage;
