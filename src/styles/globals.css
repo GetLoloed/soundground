@@ -4,7 +4,9 @@
 
 @font-face {
     font-family: 'Satoshi-Light';
-    src: url('/fonts/Satoshi-Light.woff2') format('woff2'), url('/fonts/Satoshi-Light.woff') format('woff'), url('/fonts/Satoshi-Light.ttf') format('truetype');
+    src: url('../../public/fonts/Satoshi-Light.woff2') format('woff2'),
+    url('../../public/fonts/Satoshi-Light.woff2') format('woff'),
+    url('../../public/fonts/Satoshi-Light.woff2') format('truetype');
     font-weight: 300;
     font-display: swap;
 }
