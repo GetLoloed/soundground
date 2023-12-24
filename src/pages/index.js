@@ -1,7 +1,8 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 import useMusicDownload from "../hooks/useMusicDownload";
 import Metadata from "@/components/Metadata";
+import Navbar from "@/components/Navbar";
 
 const ERROR_MESSAGE = "Invalid URL. Please enter a standard SoundCloud or YouTube URL.";
 const API_DOWNLOAD_ENDPOINT = `/api/download?url=`;
@@ -11,8 +12,9 @@ export default function Home() {
     const [url, setUrl] = useState("");
     const [isValidUrl, setIsValidUrl] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-    const {validateUrl, downloadFileFromApi} = useMusicDownload();
+    const { validateUrl, downloadFileFromApi } = useMusicDownload();
     const showPreviewButton = isValidUrl && !previewUrl;
     const showAudioPlayer = isValidUrl && previewUrl;
 
@@ -30,8 +32,10 @@ export default function Home() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (validateAndSetError(url)) {
+            setIsLoading(true);
             const apiURL = API_DOWNLOAD_ENDPOINT + encodeURIComponent(url);
-            downloadFileFromApi(apiURL);
+            await downloadFileFromApi(apiURL);
+            setIsLoading(false);
         }
     };
 
@@ -43,18 +47,14 @@ export default function Home() {
         }
     };
 
-
-
     return (
         <>
             <Metadata
                 description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from soundcloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
                 title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
-            <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7">
-                <div className="flex justify-center py-5">
-                    <Image src={'/img/soundground_white.png'} alt={'SoundGround'} width={400} height={400} priority/>
-                </div>
+            <Navbar/>
+            <div className="min-h-screen bg-black flex flex-col items-center justify-center p-3 md:p-7 h-full">
                 <form onSubmit={handleSubmit}
                       className="bg-white text-black shadow-xl rounded-lg px-5 py-5 md:px-10 md:py-5 max-w-md w-full">
                     <div className="mb-5">
@@ -69,7 +69,7 @@ export default function Home() {
                     </div>
                     <button type="submit"
                             className="w-full py-3 mt-5 bg-black rounded-lg font-bold text-white text-center hover:bg-gray-700">
-                        Download
+                        {isLoading ? 'Loading...' : 'Download'}
                     </button>
                     {showPreviewButton && (
                         <button type="button" onClick={handlePreview}
