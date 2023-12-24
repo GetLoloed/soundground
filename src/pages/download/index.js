@@ -3,6 +3,7 @@ import Metadata from "@/components/Metadata";
 import Navbar from "@/components/Navbar";
 import useMusicDownload from "@/hooks/useMusicDownload";
 import { Download as DownloadIcon, Music } from 'lucide-react';
+import Footer from "@/components/Footer";
 
 const ERROR_MESSAGE = "Invalid URL. Please enter a standard SoundCloud or YouTube URL.";
 const API_DOWNLOAD_ENDPOINT = `/api/download?url=`;
@@ -96,6 +97,7 @@ export default function Download() {
                     </div>
                 )}
             </div>
+            <Footer/>
         </>
     );
 }

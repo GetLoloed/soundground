@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {Download, Search} from 'lucide-react';
 import Metadata from "@/components/Metadata";
+import Footer from "@/components/Footer";
 
 const HomePage = () => {
     return (
@@ -38,6 +39,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 };

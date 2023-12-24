@@ -3,7 +3,7 @@ import { Github, Twitter, Facebook } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-gradient-to-br from-gray-900 to-black text-white py-10 px-5 mt-16">
+        <footer className="text-white py-10 px-5 ">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
                 <div className="text-center md:text-left mb-10 md:mb-0">
                     <h1 className="font-bold text-xl mb-2">SoundGround</h1>

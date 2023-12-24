@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Metadata from "@/components/Metadata";
 import Navbar from "@/components/Navbar";
 import {Play, Download, Youtube, Music, SearchIcon, ExternalLink} from 'lucide-react';
+import Footer from "@/components/Footer";
 
 export default function Search() {
     const [query, setQuery] = useState("");
@@ -31,7 +32,8 @@ export default function Search() {
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Search']}
                 title={'SoundGround - Search'}/>
             <Navbar/>
-            <div className="flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
+            <div
+                className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8 flex-grow">
                 <div className="mb-5 flex w-full max-w-6xl">
                     <input
                         type="text"
@@ -56,16 +58,17 @@ export default function Search() {
                                 <h2 className="text-lg font-bold mb-2">{result.author} - {result.title}</h2>
                                 <p className="text-sm text-gray-400 mb-4">
                                     Source: {result.source}
-                                    {result.source === 'YouTube' ? <Youtube className="inline ml-2"/> : <Music className="inline ml-2"/>}
+                                    {result.source === 'YouTube' ? <Youtube className="inline ml-2"/> :
+                                        <Music className="inline ml-2"/>}
                                 </p>
                                 <div className="flex justify-center space-x-4">
                                     <button onClick={() => handlePreview(result.url)}
                                             className="py-2 px-4 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 flex items-center">
-                                        <Play className="mr-2" /> Preview
+                                        <Play className="mr-2"/> Preview
                                     </button>
                                     <a className="py-2 px-4 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out flex items-center hover:bg-gray-700"
                                        href={`/api/download?url=${encodeURIComponent(result.url)}`}>
-                                        <Download className="mr-2" /> Download
+                                        <Download className="mr-2"/> Download
                                     </a>
                                 </div>
                                 {currentlyPlaying === result.url && (
@@ -76,14 +79,19 @@ export default function Search() {
                                     </audio>
                                 )}
                                 {result.source === 'YouTube' ? (
-                                    <a href={result.profile.url} target="_blank" rel="noopener noreferrer" className="mt-4 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2 inline-flex items-center">
-                                        {result.profile.name} <ExternalLink className="inline ml-1" />
+                                    <a href={result.profile.url} target="_blank" rel="noopener noreferrer"
+                                       className="mt-4 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2 inline-flex items-center">
+                                        {result.profile.name} <ExternalLink className="inline ml-1"/>
                                     </a>
                                 ) : (
-                                    <div className="mt-4 flex items-center space-x-2 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2">
-                                        <img src={result.profile.picture ? result.profile.picture : '/path/to/default/image.jpg'} alt={result.profile.name} className="w-10 h-10 rounded-full"/>
-                                        <a href={result.profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400">
-                                            {result.profile.name} <ExternalLink className="inline ml-1" />
+                                    <div
+                                        className="mt-4 flex items-center space-x-2 bg-gray-900 text-white rounded-md transition duration-300 ease-in-out hover:bg-gray-700 p-2">
+                                        <img
+                                            src={result.profile.picture ? result.profile.picture : '/path/to/default/image.jpg'}
+                                            alt={result.profile.name} className="w-10 h-10 rounded-full"/>
+                                        <a href={result.profile.url} target="_blank" rel="noopener noreferrer"
+                                           className="text-blue-500 hover:text-blue-400">
+                                            {result.profile.name} <ExternalLink className="inline ml-1"/>
                                         </a>
                                     </div>
                                 )}
@@ -92,6 +100,7 @@ export default function Search() {
                     ))}
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

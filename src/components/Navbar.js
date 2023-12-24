@@ -14,7 +14,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className='bg-gradient-to-r from-gray-900 to-black text-white shadow-lg'>
+        <nav className='text-white shadow-lg'>
             <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
                 <div className='flex items-center justify-between h-16'>
                     {/* Main site title or logo */}
