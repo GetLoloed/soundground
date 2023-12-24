@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Metadata from "@/components/Metadata";
 import Navbar from "@/components/Navbar";
-import {Play, Download, Youtube, Music, SearchIcon, ExternalLink} from 'lucide-react';
+import {Play, Download, Youtube, Music,  ExternalLink} from 'lucide-react';
 import Footer from "@/components/Footer";
 
 export default function Search() {
@@ -34,7 +34,13 @@ export default function Search() {
             <Navbar/>
             <div
                 className="min-h-screen flex flex-col items-center justify-center p-4 lg:p-8 flex-grow">
-                <div className="mb-5 flex w-full max-w-6xl">
+                <div className="mb-5 flex flex-col w-full max-w-6xl">
+                    <div className="text-center text-white mb-5 mx-auto">
+                        <h1 className="text-2xl font-bold">Welcome to SoundGround Search</h1>
+                        <p>Search for your favorite music from SoundCloud and YouTube. Listen to a preview, download for
+                            personal use, or explore artists if available. Remember, downloads are intended for personal
+                            use only!</p>
+                    </div>
                     <input
                         type="text"
                         value={query}
@@ -42,11 +48,6 @@ export default function Search() {
                         className="border border-gray-300 bg-gray-800 p-3 rounded-l-lg focus:ring focus:ring-gray-400 focus:border-gray-500 flex-grow text-white"
                         placeholder="Search for Music"
                     />
-                    <button
-                        onClick={handleSearch}
-                        className="bg-gray-700 p-3 rounded-r-md text-white">
-                        <SearchIcon className="w-5 h-5"/>
-                    </button>
                 </div>
                 <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {results.map(result => (
