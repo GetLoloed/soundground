@@ -8,7 +8,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const navigationLinks = [
-        {name: 'Download', href: '/download'},
+        {name: 'Download', href: '/'},
         {name: 'Search', href: '/search'},
         {name: 'Login', href: '/login'}
     ];
