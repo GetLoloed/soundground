@@ -27,9 +27,9 @@ export default function Search() {
     return (
         <>
             <Metadata
-                description={'Search for music from YouTube and SoundCloud.'}
+                description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from SoundCloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Search']}
-                title={'Search for Music'}/>
+                title={'SoundGround - Search'}/>
             <Navbar/>
             <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
                 <div className="mb-5 flex w-full max-w-6xl">

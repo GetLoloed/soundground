@@ -54,7 +54,7 @@ export default function Download() {
             <Metadata
                 description={'SoundGround: Your gateway to unlimited music. Download your favorite tracks from SoundCloud and YouTube for free! Experience the joy of music, anytime, anywhere.'}
                 keywords={['SoundCloud', 'YouTube', 'Music', 'Download', 'Free']}
-                title={'SoundGround - Unleash the Power of Music! Free Downloads from SoundCloud and YouTube!'}/>
+                title={'SoundGround - Download'}/>
             <Navbar/>
             <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4 lg:p-8">
                 <div className="text-center mb-10 max-w-lg">
