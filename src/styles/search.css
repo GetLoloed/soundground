@@ -1,0 +1,35 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.page, .previous, .next {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 25px; /* Increase border-radius */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Add shadow */
+    transition: all 0.3s ease; /* Add transition */
+}
+
+.page:hover, .previous:hover, .next:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25); /* Add hover effect */
+}
+
+.active {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25); /* Add shadow to active button */
+}
+
+@media (max-width: 600px) {
+    .page {
+        display: none;
+    }
+    .previous, .next {
+        display: block;
+    }
+}
