@@ -51,7 +51,6 @@ export default function Search() {
         }
     }, [query, sourceFilter, currentPage, resultsPerPage]);
 
-    // Animation variants for Framer Motion
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -202,7 +201,7 @@ export default function Search() {
                         nextLabel={'next'}
                         breakLabel={'...'}
                         breakClassName={'break-me'}
-                        pageCount={10} // replace with the total number of pages
+                        pageCount={10}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
                         onPageChange={({selected}) => setCurrentPage(selected)}

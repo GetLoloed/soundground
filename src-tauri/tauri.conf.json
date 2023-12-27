@@ -29,8 +29,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
-      "longDescription": "",
+      "identifier": "com.soundground.app",
+      "longDescription": "Application for downloading musics from YouTub and SoundCloud",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
